@@ -1,0 +1,46 @@
+# ===== Informations sensibles : ne JAMAIS les mettre dans le dépôt =====
+
+# State OpenTofu/Terraform (contient des secrets : mot de passe, IDs, clés)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+crash.*.log
+.terraform/
+.terraform.tfstate.lock.info
+*.tfplan
+tfplan
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Variables personnelles (ID d'abonnement, IP, email, chemin de clé)
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+backend.hcl
+
+# Clés et certificats
+*.pem
+*.key
+*.ppk
+id_rsa*
+id_ed25519*
+*.pfx
+*.p12
+
+# Fichiers d'environnement et secrets
+.env
+.env.*
+*.secret
+*.secrets
+secrets.txt
+credentials*
+.azure/
+
+# Logs et fichiers temporaires
+*.log
+*.swp
+.DS_Store

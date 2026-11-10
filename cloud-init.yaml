@@ -1,0 +1,23 @@
+#cloud-config
+# Exécuté une fois au premier démarrage de chaque VM web.
+package_update: true
+packages:
+  - nginx
+write_files:
+  # Configuration nginx : / = page par défaut, /sante = page de santé du Load Balancer
+  - path: /etc/nginx/sites-available/default
+    content: |
+      server {
+        listen 80 default_server;
+        root /var/www/html;
+        index index.html;
+        location = /sante {
+          default_type text/plain;
+          return 200 "OK-nimbus\n";
+        }
+      }
+runcmd:
+  # Page d'accueil avec le nom d'hôte de la VM (alterne selon la VM atteinte)
+  - |
+    echo "<h1>NimbusShop</h1><p>Serveur : $(hostname)</p>" > /var/www/html/index.html
+  - systemctl restart nginx
